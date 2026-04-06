@@ -1,8 +1,28 @@
-import { ArrowRight, ShieldCheck, Award, Globe } from 'lucide-react'
+import { useState, useEffect, useCallback } from 'react'
+import { ArrowRight, ShieldCheck, Award, Globe, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useI18n } from '../i18n/I18nProvider'
+
+/* 轮播图片列表 */
+const carouselImages = [
+  '/images/hero-product.png',
+  '/images/product-lineup.png',
+]
 
 export default function Hero() {
   const { t } = useI18n()
+  const [slideIdx, setSlideIdx] = useState(0)
+
+  const next = useCallback(() => {
+    setSlideIdx(prev => (prev + 1) % carouselImages.length)
+  }, [])
+  const prev = useCallback(() => {
+    setSlideIdx(prev => (prev - 1 + carouselImages.length) % carouselImages.length)
+  }, [])
+
+  useEffect(() => {
+    const timer = setInterval(next, 5000)
+    return () => clearInterval(timer)
+  }, [next])
 
   const handleScroll = (href: string) => {
     const target = document.querySelector(href)
@@ -227,15 +247,126 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* 右侧产品展示卡片 */}
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        {/* 右侧：图片轮播 + 产品卡片 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center', alignItems: 'center' }}>
+          {/* 图片轮播 */}
           <div style={{
             width: '100%',
-            maxWidth: '440px',
+            maxWidth: '480px',
+            position: 'relative',
+            borderRadius: '20px',
+            overflow: 'hidden',
+            border: '1px solid rgba(30,60,106,0.5)',
+            boxShadow: '0 16px 48px rgba(0,0,0,0.4)',
+          }}>
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              paddingTop: '56.25%',
+              overflow: 'hidden',
+              background: 'rgba(15,30,54,0.9)',
+            }}>
+              {carouselImages.map((img, i) => (
+                <img
+                  key={img}
+                  src={img}
+                  alt={`Product showcase ${i + 1}`}
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    opacity: i === slideIdx ? 1 : 0,
+                    transition: 'opacity 0.8s ease-in-out',
+                  }}
+                />
+              ))}
+              {/* 左右切换按钮 */}
+              <button
+                onClick={prev}
+                style={{
+                  position: 'absolute',
+                  left: '8px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  border: 'none',
+                  background: 'rgba(10,22,40,0.7)',
+                  color: '#8ea8cc',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backdropFilter: 'blur(8px)',
+                  transition: 'all 0.2s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(245,130,30,0.3)'; e.currentTarget.style.color = '#fff' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(10,22,40,0.7)'; e.currentTarget.style.color = '#8ea8cc' }}
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                onClick={next}
+                style={{
+                  position: 'absolute',
+                  right: '8px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  border: 'none',
+                  background: 'rgba(10,22,40,0.7)',
+                  color: '#8ea8cc',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backdropFilter: 'blur(8px)',
+                  transition: 'all 0.2s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(245,130,30,0.3)'; e.currentTarget.style.color = '#fff' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(10,22,40,0.7)'; e.currentTarget.style.color = '#8ea8cc' }}
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+            {/* 指示点 */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '6px',
+              padding: '12px 0',
+              background: 'rgba(10,22,40,0.6)',
+            }}>
+              {carouselImages.map((_, i) => (
+                <div
+                  key={i}
+                  onClick={() => setSlideIdx(i)}
+                  style={{
+                    width: i === slideIdx ? '20px' : '6px',
+                    height: '6px',
+                    borderRadius: '3px',
+                    background: i === slideIdx ? '#f5821e' : 'rgba(142,168,204,0.3)',
+                    transition: 'all 0.3s',
+                    cursor: 'pointer',
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* 产品规格卡片 */}
+          <div style={{
+            width: '100%',
+            maxWidth: '480px',
             background: 'rgba(22, 37, 64, 0.8)',
             border: '1px solid rgba(30,60,106,0.6)',
-            borderRadius: '24px',
-            padding: '32px',
+            borderRadius: '20px',
+            padding: '24px',
             backdropFilter: 'blur(12px)',
             boxShadow: '0 24px 64px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
             position: 'relative',
@@ -249,73 +380,42 @@ export default function Hero() {
               background: 'linear-gradient(90deg, transparent, #f5821e, transparent)',
             }} />
 
-            {/* 产品示意图 */}
-            <div style={{
-              width: '100%',
-              height: '180px',
-              background: 'linear-gradient(135deg, rgba(17,43,84,0.8), rgba(30,51,88,0.8))',
-              borderRadius: '16px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '24px',
-              border: '1px solid rgba(30,60,106,0.4)',
-              position: 'relative',
-              overflow: 'hidden',
-            }}>
-              <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-                <div style={{
-                  fontSize: '72px',
-                  lineHeight: 1,
-                  filter: 'drop-shadow(0 0 20px rgba(245,130,30,0.6))',
-                }}>🔋</div>
-                <div style={{
-                  marginTop: '8px',
-                  fontSize: '13px',
-                  color: '#00c8e0',
-                  fontWeight: 600,
-                  letterSpacing: '1px',
-                }}>{t.hero.card.certLabel}</div>
-              </div>
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,200,224,0.03) 3px, rgba(0,200,224,0.03) 4px)',
-              }} />
-            </div>
-
             {/* 产品名称 */}
-            <div style={{ marginBottom: '20px' }}>
+            <div style={{ marginBottom: '16px' }}>
               <div style={{
-                fontSize: '20px',
+                fontSize: '16px',
                 fontWeight: 700,
                 color: '#f0f4ff',
-                marginBottom: '6px',
+                marginBottom: '4px',
               }}>
                 {t.hero.card.title}
               </div>
-              <div style={{ fontSize: '13px', color: '#8ea8cc' }}>
+              <div style={{ fontSize: '12px', color: '#8ea8cc' }}>
                 {t.hero.card.subtitle}
               </div>
             </div>
 
-            {/* 参数列表 */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {/* 参数列表（紧凑双列） */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '10px',
+            }}>
               {t.hero.card.specs.map(item => (
                 <div key={item.label} style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '10px 14px',
+                  gap: '8px',
+                  padding: '8px 12px',
                   background: 'rgba(10,22,40,0.5)',
                   borderRadius: '10px',
                   border: '1px solid rgba(30,60,106,0.3)',
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '16px' }}>{item.icon}</span>
-                    <span style={{ fontSize: '13px', color: '#4a6285' }}>{item.label}</span>
+                  <span style={{ fontSize: '14px' }}>{item.icon}</span>
+                  <div>
+                    <div style={{ fontSize: '11px', color: '#4a6285' }}>{item.label}</div>
+                    <div style={{ fontSize: '13px', color: '#8ea8cc', fontWeight: 500 }}>{item.value}</div>
                   </div>
-                  <span style={{ fontSize: '13px', color: '#8ea8cc', fontWeight: 500 }}>{item.value}</span>
                 </div>
               ))}
             </div>
@@ -324,26 +424,26 @@ export default function Hero() {
             <div style={{
               display: 'flex',
               gap: '8px',
-              marginTop: '20px',
+              marginTop: '16px',
               flexWrap: 'wrap',
             }}>
               {[
-                { icon: ShieldCheck, label: 'CE' },
-                { icon: Award, label: 'RoHS' },
-                { icon: Globe, label: 'FCC' },
+                { icon: ShieldCheck, label: 'CCC' },
+                { icon: Award, label: 'PSE' },
+                { icon: Globe, label: 'CE' },
               ].map(({ icon: Icon, label }) => (
                 <div key={label} style={{
                   display: 'flex',
                   alignItems: 'center',
                   gap: '5px',
-                  padding: '5px 12px',
+                  padding: '4px 10px',
                   background: 'rgba(0,200,224,0.08)',
                   border: '1px solid rgba(0,200,224,0.2)',
                   borderRadius: '100px',
-                  fontSize: '12px',
+                  fontSize: '11px',
                   color: '#00c8e0',
                 }}>
-                  <Icon size={12} />
+                  <Icon size={11} />
                   {label}
                 </div>
               ))}

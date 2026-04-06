@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import emailjs from '@emailjs/browser'
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, CheckCircle, Building2 } from 'lucide-react'
 import { useI18n } from '../i18n/I18nProvider'
 
 type FormData = {
@@ -21,8 +21,15 @@ const EMAILJS_SERVICE_ID = 'service_oabo7gl'
 const EMAILJS_TEMPLATE_ID = 'template_cjoyg9n'
 const EMAILJS_PUBLIC_KEY = 'guhzosz0q7FLc8WMc'
 
-const infoIcons = [Phone, Mail, MapPin]
-const infoColors = ['#f5821e', '#00c8e0', '#34d399']
+const infoIcons = [Phone, Mail, MapPin, Building2]
+const infoColors = ['#f5821e', '#00c8e0', '#34d399', '#a78bfa']
+
+const infoColorRgb: Record<string, string> = {
+  '#f5821e': '245,130,30',
+  '#00c8e0': '0,200,224',
+  '#34d399': '52,211,153',
+  '#a78bfa': '167,139,250',
+}
 
 export default function Contact() {
   const { t, lang } = useI18n()
@@ -177,7 +184,7 @@ export default function Contact() {
             {t.contact.info.map((info, i) => {
               const Icon = infoIcons[i]
               const color = infoColors[i]
-              const rgb = color === '#f5821e' ? '245,130,30' : color === '#00c8e0' ? '0,200,224' : '52,211,153'
+              const rgb = infoColorRgb[color] || '245,130,30'
               return (
                 <div
                   key={i}
@@ -397,7 +404,7 @@ export default function Contact() {
                       style={{ ...inputStyle, cursor: 'pointer' }}
                     >
                       {t.contact.form.productOptions.map((opt, i) => (
-                        <option key={i} value={i === 0 ? '' : ['ultra','pro','rugged','mini','custom'][i - 1]} disabled={i === 0}>
+                        <option key={i} value={i === 0 ? '' : ['ultra','pro','rugged','mini','industrial','custom'][i - 1]} disabled={i === 0}>
                           {opt}
                         </option>
                       ))}

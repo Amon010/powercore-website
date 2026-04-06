@@ -4,19 +4,21 @@ import { useI18n } from '../i18n/I18nProvider'
 
 /* 产品规格数据（不随语言变化） */
 const productSpecs = {
-  ultra: { capacity: '20,000 mAh', power: '140W', weight: '390g', size: '140 × 68 × 26mm', ports: 'USB-C × 2 + USB-A × 1', safety: 'IEC 62133 / CE / FCC', moq: '1,000', tagColor: '#f5821e' },
-  pro: { capacity: '10,000 mAh', power: '65W', weight: '195g', size: '110 × 65 × 18mm', ports: 'USB-C × 1 + USB-A × 2', safety: 'CE / RoHS / UN38.3', moq: '2,000', tagColor: '#00c8e0' },
-  rugged: { capacity: '50,000 mAh', power: '100W + Solar', weight: '980g', size: '185 × 90 × 45mm', ports: 'USB-C × 2 + USB-A × 2 + DC', safety: 'IP67 / MIL-810G', moq: '500', tagColor: '#34d399' },
-  mini: { capacity: '5,000 mAh', power: '30W', weight: '95g', size: '90 × 46 × 18mm', ports: 'USB-C × 1', safety: 'CE / FCC / KC', moq: '5,000', tagColor: '#a78bfa' },
+  ultra: { capacity: '20,000 mAh', power: '140W', weight: '390g', size: '140 × 68 × 26mm', ports: 'USB-C × 2 + USB-A × 1', safety: '新3C / PSE / CE', moq: '1,000', tagColor: '#f5821e' },
+  pro: { capacity: '10,000 mAh', power: '65W', weight: '195g', size: '110 × 65 × 18mm', ports: 'USB-C × 1 + USB-A × 2', safety: '新3C / CE / PSE', moq: '2,000', tagColor: '#00c8e0' },
+  rugged: { capacity: '50,000 mAh', power: '100W + Solar', weight: '980g', size: '185 × 90 × 45mm', ports: 'USB-C × 2 + USB-A × 2 + DC', safety: 'IP67 / 新3C', moq: '500', tagColor: '#34d399' },
+  mini: { capacity: '5,000 mAh', power: '30W', weight: '95g', size: '90 × 46 × 18mm', ports: 'USB-C × 1', safety: '新3C / CE / PSE', moq: '5,000', tagColor: '#a78bfa' },
+  industrial: { capacity: '30,000 ~ 50,000 mAh', power: '200W', weight: '1,500g', size: '220 × 120 × 50mm', ports: 'USB-C × 2 + USB-A × 3 + DC × 2', safety: '新3C / PSE / CE / UN38.3', moq: '200', tagColor: '#f472b6' },
 } as const
 
 type ProductId = keyof typeof productSpecs
-const productIds: ProductId[] = ['ultra', 'pro', 'rugged', 'mini']
+const productIds: ProductId[] = ['ultra', 'pro', 'rugged', 'mini', 'industrial']
 
 function colorToRgb(hex: string) {
   if (hex === '#f5821e') return '245,130,30'
   if (hex === '#00c8e0') return '0,200,224'
   if (hex === '#34d399') return '52,211,153'
+  if (hex === '#f472b6') return '244,114,182'
   return '167,139,250'
 }
 
@@ -176,7 +178,7 @@ export default function Products() {
                 fontSize: '80px',
                 filter: `drop-shadow(0 0 24px ${spec.tagColor})`,
               }}>
-                {active === 'rugged' ? '🔋' : active === 'mini' ? '⚡' : '🔋'}
+                {active === 'rugged' ? '🔋' : active === 'mini' ? '⚡' : active === 'industrial' ? '🏭' : '🔋'}
               </div>
             </div>
 
