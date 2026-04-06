@@ -17,9 +17,9 @@ type FormData = {
 // EmailJS 配置 — 请替换为你自己的三个凭证
 // 注册教程见下方操作步骤
 // ============================================================
-const EMAILJS_SERVICE_ID = 'service_oabo7gl'
-const EMAILJS_TEMPLATE_ID = 'template_cjoyg9n'
-const EMAILJS_PUBLIC_KEY = 'guhzosz0q7FLc8WMc'
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || ''
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || ''
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || ''
 
 const infoIcons = [Phone, Mail, MapPin, Building2]
 const infoColors = ['#f5821e', '#00c8e0', '#34d399', '#a78bfa']
@@ -303,7 +303,7 @@ export default function Contact() {
                     transition: 'all 0.2s',
                   }}
                 >
-                  {lang === 'zh' ? '提交新询盘' : lang === 'ja' ? '新規お問い合わせ' : 'Submit Another Inquiry'}
+                  {t.contact.form.submitAnother}
                 </button>
               </div>
             ) : (

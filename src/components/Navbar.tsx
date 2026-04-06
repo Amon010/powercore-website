@@ -12,9 +12,19 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // 移动端菜单打开时锁定 body 滚动
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [isOpen])
 
   // 点击外部关闭语言选择
   useEffect(() => {
@@ -249,6 +259,9 @@ export default function Navbar() {
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              aria-label={isOpen ? (lang === 'zh' ? '关闭菜单' : lang === 'ja' ? 'メニューを閉じる' : 'Close menu') : (lang === 'zh' ? '打开菜单' : lang === 'ja' ? 'メニューを開く' : 'Open menu')}
               style={{
                 background: 'transparent',
                 border: 'none',

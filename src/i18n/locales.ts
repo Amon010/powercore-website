@@ -192,6 +192,7 @@ const zh = {
       successMsg1: '感谢您的咨询，我们的商务团队将在',
       successHighlight: '24小时内',
       successMsg2: '与您联系。如有紧急需求，请直接拨打上方联系电话。',
+      submitAnother: '提交新询盘',
     },
   },
 
@@ -386,6 +387,7 @@ const en: Translations = {
       successMsg1: 'Thank you for your inquiry. Our business team will contact you within',
       successHighlight: '24 hours',
       successMsg2: '. For urgent needs, please call the phone number above directly.',
+      submitAnother: 'Submit Another Inquiry',
     },
   },
 
@@ -580,6 +582,7 @@ const ja: Translations = {
       successMsg1: 'お問い合わせありがとうございます。営業チームが',
       successHighlight: '24時間以内に',
       successMsg2: 'ご連絡いたします。お急ぎの場合は上記の電話番号まで直接お電話ください。',
+      submitAnother: '新規お問い合わせ',
     },
   },
 

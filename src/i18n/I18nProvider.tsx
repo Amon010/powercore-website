@@ -49,11 +49,11 @@ function getInitialLang(): Lang {
 async function detectLangByIP(): Promise<Lang | null> {
   try {
     // 使用免费的 ip-api.com（仅限非商业用途，生产环境建议用 MaxMind）
-    const res = await fetch('http://ip-api.com/json/?fields=countryCode', {
+    const res = await fetch('https://ipapi.co/json/', {
       signal: AbortSignal.timeout(3000), // 3秒超时
     })
     const data = await res.json()
-    const countryCode = (data.countryCode as string || '').toUpperCase()
+    const countryCode = ((data.country_code || data.countryCode || '') as string).toUpperCase()
 
     // 日本 → 日语，中国/台湾/香港/新加坡 → 中文，其他 → 英语
     if (countryCode === 'JP') return 'ja'

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { ArrowRight, ShieldCheck, Award, Globe, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useI18n } from '../i18n/I18nProvider'
 
@@ -11,6 +11,8 @@ const carouselImages = [
 export default function Hero() {
   const { t } = useI18n()
   const [slideIdx, setSlideIdx] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const carouselRef = useRef<HTMLDivElement>(null)
 
   const next = useCallback(() => {
     setSlideIdx(prev => (prev + 1) % carouselImages.length)
@@ -20,9 +22,10 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
+    if (paused) return
     const timer = setInterval(next, 5000)
     return () => clearInterval(timer)
-  }, [next])
+  }, [next, paused])
 
   const handleScroll = (href: string) => {
     const target = document.querySelector(href)
@@ -250,15 +253,19 @@ export default function Hero() {
         {/* 右侧：图片轮播 + 产品卡片 */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center', alignItems: 'center' }}>
           {/* 图片轮播 */}
-          <div style={{
-            width: '100%',
-            maxWidth: '480px',
-            position: 'relative',
-            borderRadius: '20px',
-            overflow: 'hidden',
-            border: '1px solid rgba(30,60,106,0.5)',
-            boxShadow: '0 16px 48px rgba(0,0,0,0.4)',
-          }}>
+          <div
+            ref={carouselRef}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            style={{
+              width: '100%',
+              maxWidth: '480px',
+              position: 'relative',
+              borderRadius: '20px',
+              overflow: 'hidden',
+              border: '1px solid rgba(30,60,106,0.5)',
+              boxShadow: '0 16px 48px rgba(0,0,0,0.4)',
+            }}>
             <div style={{
               position: 'relative',
               width: '100%',
@@ -285,6 +292,7 @@ export default function Hero() {
               {/* 左右切换按钮 */}
               <button
                 onClick={prev}
+                aria-label={t === undefined ? 'Previous slide' : 'Previous slide'}
                 style={{
                   position: 'absolute',
                   left: '8px',
@@ -310,6 +318,7 @@ export default function Hero() {
               </button>
               <button
                 onClick={next}
+                aria-label="Next slide"
                 style={{
                   position: 'absolute',
                   right: '8px',
@@ -346,6 +355,11 @@ export default function Hero() {
                 <div
                   key={i}
                   onClick={() => setSlideIdx(i)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Go to slide ${i + 1}`}
+                  aria-current={i === slideIdx ? 'true' : undefined}
+                  onKeyDown={(e) => e.key === 'Enter' && setSlideIdx(i)}
                   style={{
                     width: i === slideIdx ? '20px' : '6px',
                     height: '6px',
