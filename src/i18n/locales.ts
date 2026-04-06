@@ -196,7 +196,7 @@ const zh = {
     products: ['PowerCore Ultra S1', 'PowerCore Pro P2', 'PowerCore Rugged R3', 'PowerCore Mini M4', 'OEM/ODM 定制'],
     company: ['关于我们', '发展历程', '资质认证', '新闻动态', '合作伙伴'],
     service: ['获取报价', '申请样品', '技术支持', '售后服务', '常见问题'],
-    copyright: '© 2025 PowerCore Energy Technology Co., Ltd. 保留所有权利。',
+    copyright: '© 2026 深圳市成晟新能源技术有限公司 版权所有',
     legal: ['隐私政策', '服务条款', '网站地图'],
   },
 }
@@ -383,7 +383,7 @@ const en: Translations = {
     products: ['PowerCore Ultra S1', 'PowerCore Pro P2', 'PowerCore Rugged R3', 'PowerCore Mini M4', 'OEM/ODM Custom'],
     company: ['About Us', 'Our Journey', 'Certifications', 'News', 'Partners'],
     service: ['Get Quote', 'Request Sample', 'Tech Support', 'After-Sales', 'FAQ'],
-    copyright: '© 2025 PowerCore Energy Technology Co., Ltd. All rights reserved.',
+    copyright: '© 2026 Shenzhen Chengsheng New Energy Technology Co., Ltd. All rights reserved.',
     legal: ['Privacy Policy', 'Terms of Service', 'Sitemap'],
   },
 }
@@ -570,7 +570,7 @@ const ja: Translations = {
     products: ['PowerCore Ultra S1', 'PowerCore Pro P2', 'PowerCore Rugged R3', 'PowerCore Mini M4', 'OEM/ODMカスタム'],
     company: ['会社概要', '沿革', '認証規格', 'ニュース', 'パートナー'],
     service: ['見積依頼', 'サンプル申請', '技術サポート', 'アフターサービス', 'よくある質問'],
-    copyright: '© 2025 PowerCore Energy Technology Co., Ltd. All rights reserved.',
+    copyright: '© 2026 深圳市成晟新能源技術有限公司 All rights reserved.',
     legal: ['プライバシーポリシー', '利用規約', 'サイトマップ'],
   },
 }
