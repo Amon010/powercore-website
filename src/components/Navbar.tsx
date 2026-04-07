@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Menu, X, Zap, Globe, Check } from 'lucide-react'
+import { Menu, X, Globe, Check } from 'lucide-react'
 import { useI18n } from '../i18n/I18nProvider'
 import { type Lang, langNames, langFlags } from '../i18n/locales'
 
