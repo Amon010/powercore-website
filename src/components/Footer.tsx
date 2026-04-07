@@ -1,4 +1,3 @@
-import { Zap } from 'lucide-react'
 import { useI18n } from '../i18n/I18nProvider'
 
 export default function Footer() {
@@ -21,19 +20,12 @@ export default function Footer() {
         >
           {/* 品牌信息 */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-              <div style={{
-                width: '36px', height: '36px',
-                background: 'linear-gradient(135deg, #f5821e, #ff9a3c)',
-                borderRadius: '10px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <Zap size={18} color="#fff" />
-              </div>
-              <div>
-                <div style={{ fontSize: '16px', fontWeight: 700, color: '#f0f4ff' }}>PowerCore</div>
-                <div style={{ fontSize: '9px', color: '#f5821e', letterSpacing: '2px' }}>ENERGY TECH</div>
-              </div>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+              <img
+                src="/images/logo-footer.png"
+                alt="PowerCore Logo"
+                style={{ height: '38px', width: 'auto', objectFit: 'contain' }}
+              />
             </div>
             <p style={{
               fontSize: '13px',

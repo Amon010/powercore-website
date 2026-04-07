@@ -74,21 +74,13 @@ export default function Navbar() {
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '70px' }}>
           {/* Logo */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}
+          <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
             onClick={() => handleNavClick('#home')}>
-            <div style={{
-              width: '38px', height: '38px',
-              background: 'linear-gradient(135deg, #f5821e, #ff9a3c)',
-              borderRadius: '10px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 0 16px rgba(245,130,30,0.4)',
-            }}>
-              <Zap size={20} color="#fff" />
-            </div>
-            <div>
-              <div style={{ fontSize: '18px', fontWeight: 700, color: '#f0f4ff', lineHeight: 1.2 }}>PowerCore</div>
-              <div style={{ fontSize: '10px', color: '#f5821e', letterSpacing: '2px', textTransform: 'uppercase' }}>Energy Tech</div>
-            </div>
+            <img
+              src="/images/logo-nav.png"
+              alt="PowerCore Logo"
+              style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
+            />
           </div>
 
           {/* Desktop Nav */}
