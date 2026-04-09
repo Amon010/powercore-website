@@ -4,11 +4,11 @@ import { useI18n } from '../i18n/I18nProvider'
 
 /* 产品规格数据（不随语言变化） */
 const productSpecs = {
-  ultra: { capacity: '20,000 mAh', power: '140W', weight: '390g', size: '140 × 68 × 26mm', ports: 'USB-C × 2 + USB-A × 1', safety: '新3C / PSE / CE', moq: '1,000', tagColor: '#f5821e' },
-  pro: { capacity: '10,000 mAh', power: '65W', weight: '195g', size: '110 × 65 × 18mm', ports: 'USB-C × 1 + USB-A × 2', safety: '新3C / CE / PSE', moq: '2,000', tagColor: '#00c8e0' },
-  rugged: { capacity: '50,000 mAh', power: '100W + Solar', weight: '980g', size: '185 × 90 × 45mm', ports: 'USB-C × 2 + USB-A × 2 + DC', safety: 'IP67 / 新3C', moq: '500', tagColor: '#34d399' },
-  mini: { capacity: '5,000 mAh', power: '30W', weight: '95g', size: '90 × 46 × 18mm', ports: 'USB-C × 1', safety: '新3C / CE / PSE', moq: '5,000', tagColor: '#a78bfa' },
-  industrial: { capacity: '30,000 ~ 50,000 mAh', power: '200W', weight: '1,500g', size: '220 × 120 × 50mm', ports: 'USB-C × 2 + USB-A × 3 + DC × 2', safety: '新3C / PSE / CE / UN38.3', moq: '200', tagColor: '#f472b6' },
+  ultra: { capacity: '10,000 mAh', power: '45W + 25W无线', weight: '约220g', size: '110×69.8×18.9mm', ports: 'USB-C × 2', safety: 'Qi2.2 / 新3C / CE', moq: '1,000', tagColor: '#f5821e', image: '/images/product-csi-10.png' },
+  pro: { capacity: '5,000 mAh', power: '22.5W + 15W无线', weight: '约150g', size: '110×69.8×11mm', ports: 'USB-C × 1 + USB-A × 1', safety: 'Qi2.0 / 新3C / CE', moq: '2,000', tagColor: '#00c8e0', image: '/images/product-csi-09.png' },
+  rugged: { capacity: '10,000 mAh', power: '30W + 15W无线', weight: '约200g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / CE / PSE', moq: '1,000', tagColor: '#34d399', image: '/images/product-csi-02.png' },
+  mini: { capacity: '5,000 mAh', power: '22.5W + 15W无线', weight: '约120g', size: 'TBD', ports: 'USB-C × 1', safety: '新3C / CE / PSE', moq: '3,000', tagColor: '#a78bfa', image: '/images/product-csi-01.png' },
+  industrial: { capacity: '10,000 mAh', power: '30W PD', weight: '约230g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / PSE / CE', moq: '1,000', tagColor: '#f472b6', image: '/images/product-csi-08.png' },
 } as const
 
 type ProductId = keyof typeof productSpecs
@@ -164,22 +164,27 @@ export default function Products() {
 
             {/* 产品图示 */}
             <div style={{
-              width: '200px',
-              height: '200px',
+              width: '280px',
+              height: '280px',
               margin: '0 auto 28px',
               background: `radial-gradient(circle, rgba(${rgb}, 0.1), transparent)`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              borderRadius: '50%',
+              borderRadius: '24px',
               border: `1px solid ${spec.tagColor}20`,
+              overflow: 'hidden',
             }}>
-              <div style={{
-                fontSize: '80px',
-                filter: `drop-shadow(0 0 24px ${spec.tagColor})`,
-              }}>
-                {active === 'rugged' ? '🔋' : active === 'mini' ? '⚡' : active === 'industrial' ? '🏭' : '🔋'}
-              </div>
+              <img
+                src={spec.image}
+                alt={series.name}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  padding: '16px',
+                }}
+              />
             </div>
 
             <h3 style={{
