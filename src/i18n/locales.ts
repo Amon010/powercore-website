@@ -77,10 +77,24 @@ const zh = {
   products: {
     tag: 'Product Center',
     title: '产品中心',
-    desc: '成晟 CSI 系列半固态移动电源，涵盖 5000mAh 至 10000mAh 多种容量规格，支持有线+无线双模快充，均通过 Qi2.0/Qi2.2 无线充电认证。全系产品支持 OEM/ODM 定制，满足不同市场的差异化需求。',
+    desc: '成晟 CSI 系列半固态移动电源，涵盖 14 款产品，从 5000mAh 到 20000mAh 多种容量规格，支持有线+无线双模快充。全系通过 Qi2.0/Qi2.2 无线充电认证，支持 OEM/ODM 定制。',
     specTitle: '技术规格',
     btnQuote: '立即询价',
     btnSample: '申请样品',
+    ctaTitle: '找不到合适的款式？',
+    ctaDesc: '支持 OEM/ODM 全定制，从外观到功能，我们都能实现',
+    categories: {
+      all: '全部产品',
+      wireless: '磁吸无线款',
+      standard: '普通款',
+      cable: '带线款',
+      lcd: 'LCD 显示款',
+    },
+    stats: {
+      models: '款产品',
+      categories: '大品类',
+      custom: '定制支持',
+    },
     specLabels: {
       capacity: '电芯容量',
       power: '充电功率',
@@ -273,10 +287,24 @@ const en: Translations = {
   products: {
     tag: 'Product Center',
     title: 'Product Center',
-    desc: 'Chengsheng CSI series semi-solid power banks, ranging from 5000mAh to 10000mAh, support wired + wireless dual-mode fast charging with Qi2.0/Qi2.2 wireless certification. All products support OEM/ODM customization to meet differentiated market needs.',
+    desc: 'Chengsheng CSI series semi-solid power banks — 14 models from 5000mAh to 20000mAh, supporting wired + wireless dual fast charging with Qi2.0/Qi2.2 certification. Full OEM/ODM customization available.',
     specTitle: 'Specifications',
     btnQuote: 'Get Quote',
     btnSample: 'Request Sample',
+    ctaTitle: "Can't find the right model?",
+    ctaDesc: 'Full OEM/ODM customization available — from appearance to function, we can make it happen',
+    categories: {
+      all: 'All Products',
+      wireless: 'Magnetic Wireless',
+      standard: 'Standard',
+      cable: 'Built-in Cable',
+      lcd: 'LCD Display',
+    },
+    stats: {
+      models: 'Models',
+      categories: 'Categories',
+      custom: 'Custom Support',
+    },
     specLabels: {
       capacity: 'Cell Capacity',
       power: 'Charging Power',
@@ -469,10 +497,24 @@ const ja: Translations = {
   products: {
     tag: 'Product Center',
     title: '製品紹介',
-    desc: '成晟CSIシリーズ半固体モバイルバッテリーは、5000mAhから10000mAhまでの多彩な容量ラインアップを展開。有線・無線デュアルモード急速充電に対応し、Qi2.0/Qi2.2無線充電認証を取得。全製品がOEM/ODMカスタマイズに対応し、異なる市場の差別化ニーズにお応えします。',
+    desc: '成晟CSIシリーズ半固体モバイルバッテリー — 14モデル、5000mAhから20000mAhまで展開。有線・無線デュアル急速充電対応、Qi2.0/Qi2.2認証取得。OEM/ODMカスタマイズ全対応。',
     specTitle: '仕様',
     btnQuote: '見積依頼',
     btnSample: 'サンプル申請',
+    ctaTitle: 'ご希望のモデルが見つからない場合は？',
+    ctaDesc: 'OEM/ODMフルカスタマイズ対応 — デザインから機能まで、ご要望に応じます',
+    categories: {
+      all: '全製品',
+      wireless: 'マグネット無線',
+      standard: 'スタンダード',
+      cable: 'ケーブル内蔵',
+      lcd: 'LCD表示',
+    },
+    stats: {
+      models: 'モデル',
+      categories: 'カテゴリ',
+      custom: 'カスタム対応',
+    },
     specLabels: {
       capacity: 'セル容量',
       power: '充電出力',
