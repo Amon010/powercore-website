@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MessageSquare, ChevronRight, X, Zap, Shield, Package } from 'lucide-react'
+import { MessageSquare, ChevronRight, X, Zap, Shield, Package, ChevronLeft } from 'lucide-react'
 import { useI18n } from '../i18n/I18nProvider'
 
 /* ============ 产品数据 ============ */
@@ -8,7 +8,7 @@ export type CategoryId = 'all' | 'wireless' | 'standard' | 'cable' | 'lcd'
 export interface ProductItem {
   id: string
   category: Exclude<CategoryId, 'all'>
-  image: string
+  images: string[]
   tagColor: string
   capacity: string
   power: string
@@ -19,25 +19,61 @@ export interface ProductItem {
   moq: string
 }
 
+// 产品图片路径生成函数
+function getProductImages(productId: string): string[] {
+  const images: Record<string, string[]> = {
+    'CSI-09': [
+      '/images/products/csi-09-dali-1.png', '/images/products/csi-09-dali-2.png', '/images/products/csi-09-dali-3.png',
+      '/images/products/csi-09-dali-4.png', '/images/products/csi-09-dali-5.png', '/images/products/csi-09-niu-1.png',
+      '/images/products/csi-09-niu-2.png', '/images/products/csi-09-niu-3.png', '/images/products/csi-09-niu-4.png',
+      '/images/products/csi-09-niu-5.png', '/images/products/csi-09-niu-6.png', '/images/products/csi-09-niu-7.png',
+      '/images/products/csi-09-pi-1.png', '/images/products/csi-09-pi-2.png', '/images/products/csi-09-pi-3.png',
+      '/images/products/csi-09-pi-4.png', '/images/products/csi-09-pi-5.png', '/images/products/csi-09-pi-6.png',
+      '/images/products/csi-09-pi-7.png', '/images/products/csi-09-pi-8.png',
+    ],
+    'CSI-10': [
+      '/images/products/csi-10-dali-1.png', '/images/products/csi-10-dali-2.png', '/images/products/csi-10-dali-3.png',
+      '/images/products/csi-10-dali-4.png', '/images/products/csi-10-dali-5.png', '/images/products/csi-10-niu-1.png',
+      '/images/products/csi-10-niu-2.png', '/images/products/csi-10-niu-3.png', '/images/products/csi-10-niu-4.png',
+      '/images/products/csi-10-niu-5.png', '/images/products/csi-10-niu-6.png', '/images/products/csi-10-niu-7.png',
+      '/images/products/csi-10-pi-1.png', '/images/products/csi-10-pi-2.png', '/images/products/csi-10-pi-3.png',
+      '/images/products/csi-10-pi-4.png', '/images/products/csi-10-pi-5.png', '/images/products/csi-10-pi-6.png',
+      '/images/products/csi-10-pi-7.png', '/images/products/csi-10-pi-8.png',
+    ],
+    'CSI-17': Array.from({ length: 10 }, (_, i) => `/images/products/csi-17-${i + 1}.png`),
+    'CSI-01': Array.from({ length: 6 }, (_, i) => `/images/products/csi-01-${i + 1}.png`),
+    'CSI-02': Array.from({ length: 7 }, (_, i) => `/images/products/csi-02-${i + 1}.png`),
+    'CSI-03': Array.from({ length: 7 }, (_, i) => `/images/products/csi-03-${i + 1}.png`),
+    'CSI-04': Array.from({ length: 7 }, (_, i) => `/images/products/csi-04-${i + 1}.png`),
+    'CSI-05': Array.from({ length: 10 }, (_, i) => `/images/products/csi-05-${i + 1}.png`),
+    'CSI-06': Array.from({ length: 7 }, (_, i) => `/images/products/csi-06-${i + 1}.png`),
+    'CSI-07': Array.from({ length: 6 }, (_, i) => `/images/products/csi-07-${i + 1}.png`),
+    'CSI-08': Array.from({ length: 6 }, (_, i) => `/images/products/csi-08-${i + 1}.png`),
+    'CSI-18': Array.from({ length: 5 }, (_, i) => `/images/products/csi-18-${i + 1}.png`),
+    'CSI-21': Array.from({ length: 6 }, (_, i) => `/images/products/csi-21-${i + 1}.png`),
+  }
+  return images[productId] || ['/images/product-csi-01.png']
+}
+
 export const allProducts: ProductItem[] = [
   // 磁吸/无线款
-  { id: 'CSI-09', category: 'wireless', image: '/images/product-csi-09.png', tagColor: '#00c8e0', capacity: '5,000 mAh', power: '22.5W + 15W 无线', weight: '约150g', size: '110×69.8×11mm', ports: 'USB-C × 1 + USB-A × 1', safety: 'Qi2.0 / 新3C / CE', moq: '2,000' },
-  { id: 'CSI-10', category: 'wireless', image: '/images/product-csi-10.png', tagColor: '#f5821e', capacity: '10,000 mAh', power: '45W + 25W 无线', weight: '约220g', size: '110×69.8×18.9mm', ports: 'USB-C × 2', safety: 'Qi2.2 / 新3C / CE', moq: '1,000' },
-  { id: 'CSI-17', category: 'wireless', image: '/images/product-csi-17.png', tagColor: '#a78bfa', capacity: '10,000 mAh', power: '30W + 15W 无线', weight: '约200g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: 'Qi2.0 / 新3C / CE', moq: '1,000' },
+  { id: 'CSI-09', category: 'wireless', images: getProductImages('CSI-09'), tagColor: '#00c8e0', capacity: '5,000 mAh', power: '22.5W + 15W 无线', weight: '约150g', size: '110×69.8×11mm', ports: 'USB-C × 1 + USB-A × 1', safety: 'Qi2.0 / 新3C / CE', moq: '2,000' },
+  { id: 'CSI-10', category: 'wireless', images: getProductImages('CSI-10'), tagColor: '#f5821e', capacity: '10,000 mAh', power: '45W + 25W 无线', weight: '约220g', size: '110×69.8×18.9mm', ports: 'USB-C × 2', safety: 'Qi2.2 / 新3C / CE', moq: '1,000' },
+  { id: 'CSI-17', category: 'wireless', images: getProductImages('CSI-17'), tagColor: '#a78bfa', capacity: '10,000 mAh', power: '30W + 15W 无线', weight: '约200g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: 'Qi2.0 / 新3C / CE', moq: '1,000' },
   // 普通款
-  { id: 'CSI-01', category: 'standard', image: '/images/product-csi-01.png', tagColor: '#a78bfa', capacity: '5,000 mAh', power: '22.5W', weight: '约120g', size: 'TBD', ports: 'USB-C × 1', safety: '新3C / CE / PSE', moq: '3,000' },
-  { id: 'CSI-02', category: 'standard', image: '/images/product-csi-02.png', tagColor: '#34d399', capacity: '10,000 mAh', power: '30W + 15W 无线', weight: '约200g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / CE / PSE', moq: '1,000' },
-  { id: 'CSI-03', category: 'standard', image: '/images/product-csi-03.png', tagColor: '#34d399', capacity: '10,000 mAh', power: '22.5W', weight: '约180g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / CE', moq: '1,000' },
-  { id: 'CSI-04', category: 'standard', image: '/images/product-csi-04.png', tagColor: '#f472b6', capacity: '20,000 mAh', power: '65W PD', weight: '约380g', size: 'TBD', ports: 'USB-C × 2 + USB-A × 1', safety: '新3C / CE / PSE', moq: '500' },
-  { id: 'CSI-18', category: 'standard', image: '/images/product-csi-18.png', tagColor: '#34d399', capacity: '10,000 mAh', power: '22.5W', weight: '约180g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / CE', moq: '1,000' },
-  { id: 'CSI-19', category: 'standard', image: '/images/product-csi-19.png', tagColor: '#a78bfa', capacity: '5,000 mAh', power: '15W', weight: '约110g', size: 'TBD', ports: 'USB-C × 1', safety: '新3C / CE', moq: '3,000' },
-  { id: 'CSI-21', category: 'standard', image: '/images/product-csi-21.png', tagColor: '#f472b6', capacity: '10,000 mAh', power: '22.5W', weight: '约190g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / CE / PSE', moq: '1,000' },
+  { id: 'CSI-01', category: 'standard', images: getProductImages('CSI-01'), tagColor: '#a78bfa', capacity: '5,000 mAh', power: '22.5W', weight: '约120g', size: 'TBD', ports: 'USB-C × 1', safety: '新3C / CE / PSE', moq: '3,000' },
+  { id: 'CSI-02', category: 'standard', images: getProductImages('CSI-02'), tagColor: '#34d399', capacity: '10,000 mAh', power: '30W + 15W 无线', weight: '约200g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / CE / PSE', moq: '1,000' },
+  { id: 'CSI-03', category: 'standard', images: getProductImages('CSI-03'), tagColor: '#34d399', capacity: '10,000 mAh', power: '22.5W', weight: '约180g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / CE', moq: '1,000' },
+  { id: 'CSI-04', category: 'standard', images: getProductImages('CSI-04'), tagColor: '#f472b6', capacity: '20,000 mAh', power: '65W PD', weight: '约380g', size: 'TBD', ports: 'USB-C × 2 + USB-A × 1', safety: '新3C / CE / PSE', moq: '500' },
+  { id: 'CSI-18', category: 'standard', images: getProductImages('CSI-18'), tagColor: '#34d399', capacity: '10,000 mAh', power: '22.5W', weight: '约180g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / CE', moq: '1,000' },
+  { id: 'CSI-19', category: 'standard', images: getProductImages('CSI-19'), tagColor: '#a78bfa', capacity: '5,000 mAh', power: '15W', weight: '约110g', size: 'TBD', ports: 'USB-C × 1', safety: '新3C / CE', moq: '3,000' },
+  { id: 'CSI-21', category: 'standard', images: getProductImages('CSI-21'), tagColor: '#f472b6', capacity: '10,000 mAh', power: '22.5W', weight: '约190g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / CE / PSE', moq: '1,000' },
   // 带线款
-  { id: 'CSI-06', category: 'cable', image: '/images/product-csi-06.png', tagColor: '#f5821e', capacity: '10,000 mAh', power: '22.5W', weight: '约200g', size: 'TBD', ports: 'USB-C Built-in', safety: '新3C / CE', moq: '1,000' },
-  { id: 'CSI-07', category: 'cable', image: '/images/product-csi-07.png', tagColor: '#f5821e', capacity: '10,000 mAh', power: '30W', weight: '约210g', size: 'TBD', ports: 'USB-C Built-in + USB-A × 1', safety: '新3C / CE / PSE', moq: '1,000' },
+  { id: 'CSI-06', category: 'cable', images: getProductImages('CSI-06'), tagColor: '#f5821e', capacity: '10,000 mAh', power: '22.5W', weight: '约200g', size: 'TBD', ports: 'USB-C Built-in', safety: '新3C / CE', moq: '1,000' },
+  { id: 'CSI-07', category: 'cable', images: getProductImages('CSI-07'), tagColor: '#f5821e', capacity: '10,000 mAh', power: '30W', weight: '约210g', size: 'TBD', ports: 'USB-C Built-in + USB-A × 1', safety: '新3C / CE / PSE', moq: '1,000' },
   // LCD 款
-  { id: 'CSI-05', category: 'lcd', image: '/images/product-csi-05.png', tagColor: '#00c8e0', capacity: '10,000 mAh', power: '22.5W', weight: '约200g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / CE / PSE', moq: '1,000' },
-  { id: 'CSI-08', category: 'lcd', image: '/images/product-csi-08.png', tagColor: '#f472b6', capacity: '10,000 mAh', power: '30W PD', weight: '约230g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / PSE / CE', moq: '1,000' },
+  { id: 'CSI-05', category: 'lcd', images: getProductImages('CSI-05'), tagColor: '#00c8e0', capacity: '10,000 mAh', power: '22.5W', weight: '约200g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / CE / PSE', moq: '1,000' },
+  { id: 'CSI-08', category: 'lcd', images: getProductImages('CSI-08'), tagColor: '#f472b6', capacity: '10,000 mAh', power: '30W PD', weight: '约230g', size: 'TBD', ports: 'USB-C × 1 + USB-A × 1', safety: '新3C / PSE / CE', moq: '1,000' },
 ]
 
 const CATEGORY_COLORS: Record<Exclude<CategoryId, 'all'>, string> = {
@@ -58,14 +94,156 @@ function hexToRgb(hex: string) {
   return map[hex] ?? '100,150,200'
 }
 
+/* ============ 图片轮播组件 ============ */
+function ImageCarousel({
+  images,
+  tagColor,
+  alt,
+  size = 'card',
+}: {
+  images: string[]
+  tagColor: string
+  alt: string
+  size?: 'card' | 'modal'
+}) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const rgb = hexToRgb(tagColor)
+  const isCard = size === 'card'
+
+  const goToPrev = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+  }
+
+  const goToNext = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+  }
+
+  return (
+    <div style={{
+      position: 'relative',
+      width: '100%',
+      aspectRatio: '1',
+      background: `radial-gradient(circle, rgba(${rgb},0.08), transparent)`,
+      borderRadius: isCard ? '14px' : '20px',
+      border: `1px solid ${tagColor}15`,
+      overflow: 'hidden',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
+      <img
+        src={images[currentIndex]}
+        alt={`${alt} - ${currentIndex + 1}`}
+        style={{ width: '85%', height: '85%', objectFit: 'contain' }}
+      />
+
+      {/* 左右切换按钮 */}
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={goToPrev}
+            style={{
+              position: 'absolute',
+              left: '8px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: isCard ? '28px' : '36px',
+              height: isCard ? '28px' : '36px',
+              borderRadius: '50%',
+              background: 'rgba(10,22,40,0.7)',
+              border: `1px solid ${tagColor}40`,
+              color: tagColor,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 2,
+              transition: 'all 0.2s',
+            }}
+          >
+            <ChevronLeft size={isCard ? 16 : 20} />
+          </button>
+          <button
+            onClick={goToNext}
+            style={{
+              position: 'absolute',
+              right: '8px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: isCard ? '28px' : '36px',
+              height: isCard ? '28px' : '36px',
+              borderRadius: '50%',
+              background: 'rgba(10,22,40,0.7)',
+              border: `1px solid ${tagColor}40`,
+              color: tagColor,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 2,
+              transition: 'all 0.2s',
+            }}
+          >
+            <ChevronRight size={isCard ? 16 : 20} />
+          </button>
+        </>
+      )}
+
+      {/* 图片指示器 */}
+      {images.length > 1 && (
+        <div style={{
+          position: 'absolute',
+          bottom: '8px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          gap: '4px',
+          zIndex: 2,
+        }}>
+          {images.map((_, idx) => (
+            <div
+              key={idx}
+              style={{
+                width: idx === currentIndex ? '16px' : '6px',
+                height: '6px',
+                borderRadius: '3px',
+                background: idx === currentIndex ? tagColor : 'rgba(255,255,255,0.3)',
+                transition: 'all 0.2s',
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* 图片数量标签 */}
+      {images.length > 1 && (
+        <div style={{
+          position: 'absolute',
+          top: '8px',
+          right: '8px',
+          background: 'rgba(10,22,40,0.7)',
+          border: `1px solid ${tagColor}40`,
+          borderRadius: '100px',
+          padding: '2px 8px',
+          fontSize: '11px',
+          color: tagColor,
+          zIndex: 2,
+        }}>
+          {currentIndex + 1} / {images.length}
+        </div>
+      )}
+    </div>
+  )
+}
+
 /* ============ 产品卡片 ============ */
 function ProductCard({
   product,
-  categoryLabel,
   onClick,
 }: {
   product: ProductItem
-  categoryLabel: string
   onClick: () => void
 }) {
   const [hovered, setHovered] = useState(false)
@@ -80,7 +258,7 @@ function ProductCard({
         background: hovered ? 'rgba(22,37,64,0.9)' : 'rgba(22,37,64,0.6)',
         border: `1px solid ${hovered ? product.tagColor + '60' : 'rgba(30,60,106,0.4)'}`,
         borderRadius: '20px',
-        padding: '24px 20px 20px',
+        padding: '20px',
         cursor: 'pointer',
         transition: 'all 0.25s',
         transform: hovered ? 'translateY(-4px)' : 'none',
@@ -99,42 +277,9 @@ function ProductCard({
         transition: 'opacity 0.25s',
       }} />
 
-      {/* 类别标签 */}
-      <div style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '5px',
-        background: `rgba(${rgb},0.12)`,
-        border: `1px solid ${product.tagColor}30`,
-        borderRadius: '100px',
-        padding: '3px 10px',
-        fontSize: '11px',
-        color: product.tagColor,
-        fontWeight: 700,
-        marginBottom: '16px',
-        letterSpacing: '0.5px',
-      }}>
-        ● {categoryLabel}
-      </div>
-
-      {/* 产品图 */}
-      <div style={{
-        width: '100%',
-        aspectRatio: '1',
-        background: `radial-gradient(circle, rgba(${rgb},0.08), transparent)`,
-        borderRadius: '14px',
-        border: `1px solid ${product.tagColor}15`,
-        overflow: 'hidden',
-        marginBottom: '16px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-        <img
-          src={product.image}
-          alt={product.id}
-          style={{ width: '85%', height: '85%', objectFit: 'contain' }}
-        />
+      {/* 产品图轮播 */}
+      <div style={{ marginBottom: '16px' }}>
+        <ImageCarousel images={product.images} tagColor={product.tagColor} alt={product.id} size="card" />
       </div>
 
       {/* 型号 */}
@@ -179,12 +324,10 @@ function ProductCard({
 /* ============ 产品详情弹窗 ============ */
 function ProductModal({
   product,
-  categoryLabel,
   onClose,
   onQuote,
 }: {
   product: ProductItem
-  categoryLabel: string
   onClose: () => void
   onQuote: () => void
 }) {
@@ -265,48 +408,15 @@ function ProductModal({
           gridTemplateColumns: '1fr 1.1fr',
           gap: '0',
         }} className="modal-grid">
-          {/* 左：图片 */}
+          {/* 左：图片轮播 */}
           <div style={{
             padding: '48px 32px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}>
-            {/* 类别标签 */}
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              background: `rgba(${rgb},0.15)`,
-              border: `1px solid ${product.tagColor}40`,
-              borderRadius: '100px',
-              padding: '5px 16px',
-              fontSize: '12px',
-              color: product.tagColor,
-              fontWeight: 700,
-              marginBottom: '28px',
-              letterSpacing: '1px',
-            }}>
-              ● {categoryLabel}
-            </div>
-
-            <div style={{
-              width: '260px',
-              height: '260px',
-              background: `radial-gradient(circle, rgba(${rgb},0.1), transparent)`,
-              borderRadius: '20px',
-              border: `1px solid ${product.tagColor}25`,
-              overflow: 'hidden',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '28px',
-            }}>
-              <img
-                src={product.image}
-                alt={product.id}
-                style={{ width: '85%', height: '85%', objectFit: 'contain' }}
-              />
+            <div style={{ width: '260px', marginBottom: '28px' }}>
+              <ImageCarousel images={product.images} tagColor={product.tagColor} alt={product.id} size="modal" />
             </div>
 
             <div style={{ fontSize: '26px', fontWeight: 900, color: '#f0f4ff', marginBottom: '4px' }}>
@@ -406,31 +516,7 @@ function ProductModal({
 /* ============ 主组件 ============ */
 export default function Products() {
   const { t } = useI18n()
-  const [activeCategory, setActiveCategory] = useState<CategoryId>('all')
   const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null)
-
-  const categories: { id: CategoryId; labelKey: string }[] = [
-    { id: 'all', labelKey: 'all' },
-    { id: 'wireless', labelKey: 'wireless' },
-    { id: 'standard', labelKey: 'standard' },
-    { id: 'cable', labelKey: 'cable' },
-    { id: 'lcd', labelKey: 'lcd' },
-  ]
-
-  const categoryLabels: Record<CategoryId, string> = {
-    all: t.products.categories?.all ?? '全部',
-    wireless: t.products.categories?.wireless ?? '磁吸无线',
-    standard: t.products.categories?.standard ?? '普通款',
-    cable: t.products.categories?.cable ?? '带线款',
-    lcd: t.products.categories?.lcd ?? 'LCD显示',
-  }
-
-  const filtered = activeCategory === 'all'
-    ? allProducts
-    : allProducts.filter(p => p.category === activeCategory)
-
-  const getCategoryLabel = (p: ProductItem) => categoryLabels[p.category]
-  const getCategoryColor = (cat: Exclude<CategoryId, 'all'>) => CATEGORY_COLORS[cat]
 
   return (
     <section
@@ -518,53 +604,6 @@ export default function Products() {
           </div>
         </div>
 
-        {/* 分类 Tab */}
-        <div style={{
-          display: 'flex',
-          gap: '10px',
-          justifyContent: 'center',
-          marginBottom: '48px',
-          flexWrap: 'wrap',
-        }}>
-          {categories.map(cat => {
-            const isActive = activeCategory === cat.id
-            const color = cat.id === 'all' ? '#f5821e' : getCategoryColor(cat.id as Exclude<CategoryId, 'all'>)
-            const rgb = hexToRgb(color)
-            const count = cat.id === 'all' ? allProducts.length : allProducts.filter(p => p.category === cat.id).length
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                style={{
-                  padding: '10px 22px',
-                  borderRadius: '100px',
-                  border: `1.5px solid ${isActive ? color : 'rgba(30,60,106,0.5)'}`,
-                  background: isActive ? `rgba(${rgb},0.12)` : 'transparent',
-                  color: isActive ? color : '#8ea8cc',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                }}
-              >
-                {categoryLabels[cat.id]}
-                <span style={{
-                  fontSize: '11px',
-                  background: isActive ? `rgba(${rgb},0.2)` : 'rgba(30,60,106,0.4)',
-                  borderRadius: '100px',
-                  padding: '1px 7px',
-                  color: isActive ? color : '#4a6285',
-                }}>
-                  {count}
-                </span>
-              </button>
-            )
-          })}
-        </div>
-
         {/* 产品网格 */}
         <div
           className="products-grid"
@@ -574,11 +613,10 @@ export default function Products() {
             gap: '20px',
           }}
         >
-          {filtered.map(product => (
+          {allProducts.map(product => (
             <ProductCard
               key={product.id}
               product={product}
-              categoryLabel={getCategoryLabel(product)}
               onClick={() => setSelectedProduct(product)}
             />
           ))}
@@ -627,7 +665,6 @@ export default function Products() {
       {selectedProduct && (
         <ProductModal
           product={selectedProduct}
-          categoryLabel={getCategoryLabel(selectedProduct)}
           onClose={() => setSelectedProduct(null)}
           onQuote={() => {
             setSelectedProduct(null)
