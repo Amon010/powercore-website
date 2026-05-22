@@ -30,9 +30,9 @@ const zh = {
     title1: '新一代',
     title2: '半固态移动电源',
     title3: '专业B2B供应商',
-    desc: '深圳市成晟新能源成立于2000年，专注半固态锂电池技术研发，为全球经销商、集成商提供',
+    desc: 'semibattery.com 是 PowerCore Energy（成晟新能源）官方B2B采购平台。公司成立于2000年，专注半固态锂电池技术研发，为全球经销商、集成商提供',
     descHighlight: '高安全性、长续航、定制化',
-    descAfter: '的移动电源解决方案。全系产品支持 Qi2.0/Qi2.2 无线充电认证，OEM/ODM 定制服务。',
+    descAfter: '的移动电源解决方案。14款CSI系列产品，3,000–50,000 mAh，全系通过新3C/PSE/CE认证，支持 Qi2.0/Qi2.2 无线充电，OEM/ODM 定制最小起订1,000件。',
     btnProducts: '查看产品系列',
     btnSample: '申请样品',
     stats: [
@@ -56,7 +56,7 @@ const zh = {
   about: {
     tag: 'About Us',
     title: '关于我们',
-    desc: '深圳市成晟新能源技术有限公司成立于2000年，是一家专注于半固态锂电池技术研发、生产与销售的高科技企业。产品涵盖移动电源、控制板、便携储能系统、节能照明及数码周边产品，拥有20多项核心专利技术，广泛应用于LED照明、移动电源、智能家居及储能电池组领域。',
+    desc: '深圳市成晟新能源技术有限公司（semibattery.com / PowerCore Energy）成立于2000年，是一家专注于半固态锂电池技术研发、生产与销售的高科技企业。产品涵盖移动电源、控制板、便携储能系统、节能照明及数码周边产品，拥有20多项核心专利技术，广泛应用于LED照明、移动电源、智能家居及储能电池组领域。半固态电解质技术相比传统液态锂电，热失控风险降低30%以上，能量密度高达350 Wh/kg。',
     stats: [
       { value: '25年+', label: '行业深耕', desc: '专注新能源领域' },
       { value: '20+', label: '核心专利技术', desc: '半固态电芯自主研发' },
@@ -240,9 +240,9 @@ const en: Translations = {
     title1: 'Next-Gen',
     title2: 'Semi-Solid Power Banks',
     title3: 'Professional B2B Supplier',
-    desc: 'Shenzhen Chengsheng New Energy, established in 2000, specializes in semi-solid lithium battery R&D, providing global distributors and integrators with',
-    descHighlight: 'high safety, long endurance, and customizable',
-    descAfter: ' power bank solutions. Full series Qi2.0/Qi2.2 wireless certified, with OEM/ODM services.',
+    desc: 'semibattery.com is the official B2B sourcing portal of PowerCore Energy (Shenzhen Chengsheng New Energy Technology Co., Ltd.), founded in 2000. We specialize in semi-solid lithium battery R&D, offering global distributors and OEM buyers',
+    descHighlight: 'high safety, long endurance, and fully customizable',
+    descAfter: ' power bank solutions. 14 CSI-series models, 3,000–50,000 mAh, CE/CCC/PSE/IEC 62133 certified, Qi2.0/Qi2.2 wireless charging, MOQ from 1,000 pcs.',
     btnProducts: 'View Product Series',
     btnSample: 'Request Sample',
     stats: [
@@ -266,7 +266,7 @@ const en: Translations = {
   about: {
     tag: 'About Us',
     title: 'About Us',
-    desc: 'Shenzhen Chengsheng New Energy Technology Co., Ltd., established in 2000, is a high-tech enterprise dedicated to the research, development, production, and sales of semi-solid lithium battery technology. Our product portfolio includes power banks, control boards, portable energy storage systems, energy-saving lighting, and digital accessories, with over 20 core patented technologies widely applied in LED lighting, mobile power, smart home, and energy storage battery packs.',
+    desc: 'semibattery.com — Shenzhen Chengsheng New Energy Technology Co., Ltd. (PowerCore Energy), established in 2000, is a high-tech manufacturer dedicated to semi-solid lithium battery R&D and OEM/ODM production. Our CSI series power banks feature semi-solid electrolyte cells with energy density up to 350 Wh/kg — over 30% higher than conventional liquid lithium cells. Products hold CE, CCC (新3C), PSE, IEC 62133, and UN38.3 certifications, and cover 3,000–50,000 mAh with Qi2.0/Qi2.2 wireless charging support.',
     stats: [
       { value: '25+ Yrs', label: 'Industry Experience', desc: 'Focused on new energy' },
       { value: '20+', label: 'Core Patents', desc: 'Self-developed semi-solid cells' },
