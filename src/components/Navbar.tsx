@@ -77,9 +77,9 @@ export default function Navbar() {
           <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
             onClick={() => handleNavClick('#home')}>
             <img
-              src="/images/logo-nav.png"
+              src="/images/logo-chengsheng.png"
               alt="PowerCore Logo"
-              style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
+              style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
             />
           </div>
 

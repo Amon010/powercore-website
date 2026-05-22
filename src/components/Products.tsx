@@ -50,6 +50,7 @@ function getProductImages(productId: string): string[] {
     'CSI-07': Array.from({ length: 6 }, (_, i) => `/images/products/csi-07-${i + 1}.png`),
     'CSI-08': Array.from({ length: 6 }, (_, i) => `/images/products/csi-08-${i + 1}.png`),
     'CSI-18': Array.from({ length: 5 }, (_, i) => `/images/products/csi-18-${i + 1}.png`),
+    'CSI-19': ['/images/products/csi-19-1.png'],
     'CSI-21': Array.from({ length: 6 }, (_, i) => `/images/products/csi-21-${i + 1}.png`),
   }
   return images[productId] || ['/images/product-csi-01.png']

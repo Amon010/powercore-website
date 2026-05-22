@@ -64,9 +64,9 @@ export default function Footer() {
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
               <a href="https://semibattery.com/" aria-label="semibattery.com — PowerCore Energy homepage">
                 <img
-                  src="/images/logo-footer.png"
+                  src="/images/logo-chengsheng.png"
                   alt="PowerCore Energy — semibattery.com logo"
-                  style={{ height: '38px', width: 'auto', objectFit: 'contain' }}
+                  style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
                 />
               </a>
             </div>
